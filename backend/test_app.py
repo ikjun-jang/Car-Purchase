@@ -34,21 +34,6 @@ class BookTestCase(unittest.TestCase):
             # create all tables
             self.db.create_all()
 
-    def test_get_report(self):
-        res = self.client().get("/report")
-        data = json.loads(res.data)
-
-        self.assertEqual(res.status_code, 200)
-        self.assertEqual(data["success"], True)
-
-    def test_404_requesting_invalid_address_to_report(self):
-        res = self.client().get("/reports")
-        data = json.loads(res.data)
-
-        self.assertEqual(res.status_code, 404)
-        self.assertEqual(data["success"], False)
-        self.assertEqual(data["message"], "resource not found")
-
     def test_purchase_car(self):
         res = self.client().post("/configure", json=self.new_purchase)
         data = json.loads(res.data)
@@ -71,6 +56,21 @@ class BookTestCase(unittest.TestCase):
         self.assertEqual(res.status_code, 422)
         self.assertEqual(data["success"], False)
         self.assertEqual(data["message"], "unprocessable")
+
+    def test_get_report(self):
+        res = self.client().get("/report")
+        data = json.loads(res.data)
+
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(data["success"], True)
+
+    def test_404_requesting_invalid_address_to_report(self):
+        res = self.client().get("/reports")
+        data = json.loads(res.data)
+
+        self.assertEqual(res.status_code, 404)
+        self.assertEqual(data["success"], False)
+        self.assertEqual(data["message"], "resource not found")
 
     def tearDown(self):
         """Executed after reach test"""
