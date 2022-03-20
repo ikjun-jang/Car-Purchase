@@ -9,9 +9,9 @@ pipeline {
                 sh 'cd ${WORKSPACE}'
                 sh 'cd backend'
                 sh 'pip3 install -r requirements.txt'
-                sh 'source setup.sh'
                 sh 'sudo -u postgres createdb car'
-                sh 'psql -d car -U postgres -a -f car.psql'
+                sh 'source setup.sh'
+                //sh 'psql -d car -U postgres -a -f car.psql'
             }
         }
         stage('run') {
