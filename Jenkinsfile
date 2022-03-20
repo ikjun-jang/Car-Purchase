@@ -8,7 +8,7 @@ pipeline {
                 sh 'pip3 install --upgrade pip'
                 sh 'cd ${WORKSPACE}'
                 sh 'ls'
-                sh 'cd backend'
+                sh 'cd /backend'
                 sh 'ls'
                 sh 'pip3 install -r requirements.txt'
                 sh 'sudo -u postgres createdb car'
