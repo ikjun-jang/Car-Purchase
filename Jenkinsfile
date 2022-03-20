@@ -8,9 +8,9 @@ pipeline {
                 sh 'pip3 install --upgrade pip'
                 //sh 'cd ${WORKSPACE}'
                 sh 'ls'
-                sh 'pip3 install -r /backend/requirements.txt'
+                sh 'pip3 install -r ./backend/requirements.txt'
                 sh 'sudo -u postgres createdb car'
-                sh '/backend/source setup.sh'
+                sh './backend/source setup.sh'
                 //sh 'psql -d car -U postgres -a -f car.psql'
             }
         }
