@@ -16,7 +16,7 @@ class BookTestCase(unittest.TestCase):
         """ 
         Database credentials handled using the dynamic environment variables 
         """
-        self.database_path = os.getenv('DATABASE_TEST_URL', "postgresql://postgres:1701@localhost:5432/library_test")
+        self.database_path = os.getenv('DATABASE_TEST_URL', "postgresql://postgres@localhost:5432/car_test")
 
         setup_db(self.app, self.database_path)
 

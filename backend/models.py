@@ -5,7 +5,7 @@ from flask_sqlalchemy import SQLAlchemy
 '''
 Database credentials handled using the dynamic environment variables
 '''
-database_path = os.getenv('DATABASE_URL', "postgresql://postgres:1701@localhost:5432/car")
+database_path = os.getenv('DATABASE_URL', "postgresql://postgres@localhost:5432/car")
 
 db = SQLAlchemy()
 
