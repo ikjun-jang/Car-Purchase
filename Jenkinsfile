@@ -8,9 +8,7 @@ pipeline {
                 sh 'sudo systemctl start postgresql'
                 sh 'sudo -u postgres createdb car'
                 sh 'source ./backend/setup.sh'
-                sh 'cd ${WORKSPACE}'
-                sh 'cd ./frontend'
-                sh 'npm install'
+                sh '${WORKSPACE}/frontend/npm install'
             }
         }
         stage('test') {
@@ -22,9 +20,7 @@ pipeline {
         stage('run') {
             steps {
                 sh 'nohup python3 ${WORKSPACE}/backend/app.py &'
-                sh 'cd ${WORKSPACE}'
-                sh 'cd ./frontend'
-                sh 'nohup npm start'
+                sh '${WORKSPACE}/frontend/nohup npm start'
             }
         }
     }
