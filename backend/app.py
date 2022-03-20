@@ -41,24 +41,27 @@ def create_app(test_config=None):
         elif type == Tire.RACING: price = 150
         return price
     
+    '''
+    calculate if today is the last Friday of the month
+    '''
     def check_discount():
         result = False
 
         tz = pytz.timezone('Europe/Berlin')
         now = datetime.datetime.now(tz)
-        long_months = [1, 3, 5, 7, 8, 10, 12]
-        short_months = [4, 6, 9, 11]
+        long_months = [1, 3, 5, 7, 8, 10, 12] # months with 31 days
+        short_months = [4, 6, 9, 11] # # months with 30 days
          
-        if now.weekday() == 4:
-            if now.month in long_months and now.day >= 25:
+        if now.weekday() == 4: # Friday
+            if now.month in long_months and now.day >= 25: # last friday of 31-day-month
                 result = True
-            elif now.month in short_months and now.day >= 24:
+            elif now.month in short_months and now.day >= 24: # last friday of 30-day-month
                 result = True
-            elif now.month == 2 and now.year % 4 == 0 and now.day >= 23:
+            elif now.month == 2 and now.year % 4 == 0 and now.day >= 23: # last friday of 29-day-February (leap year)
                 result = True
-            elif now.month == 2 and now.year % 4 != 0 and now.day >= 22:
+            elif now.month == 2 and now.year % 4 != 0 and now.day >= 22: # last friday of 28-day-February
                 result = True
-
+                
         return result
 
     def calc_price(battery, wheel, tire):

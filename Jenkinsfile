@@ -8,7 +8,7 @@ pipeline {
                 sh 'sudo systemctl start postgresql'
                 sh 'sudo -u postgres createdb car'
                 sh 'source ./backend/setup.sh'
-                //sh 'npm --prefix ./frontend install'
+                sh 'npm --prefix ./frontend install'
             }
         }
         stage('test') {
@@ -20,13 +20,12 @@ pipeline {
         stage('run') {
             steps {
                 sh 'nohup python3 ./backend/app.py &'
-                //sh 'nohup npm --prefix ./frontend start'
+                sh 'nohup npm --prefix ./frontend start &'
             }
         }
     }
     post {
         cleanup {
-            //sh 'sudo -u postgres dropdb car'
             sh 'sudo -u postgres dropdb car_test'
         }
     }
