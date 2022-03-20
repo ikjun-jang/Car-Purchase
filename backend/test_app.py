@@ -41,7 +41,7 @@ class BookTestCase(unittest.TestCase):
         self.assertEqual(res.status_code, 200)
         self.assertEqual(data["success"], True)
 
-    def test_422_sent_invalid_purchase_info_2(self):
+    def test_422_sent_invalid_purchase_info_1(self):
         res = self.client().post("/configure", json=self.invalid_purchase_1)
         data = json.loads(res.data)
 

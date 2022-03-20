@@ -26,4 +26,7 @@ pipeline {
             }
         }
     }
+    post {
+        sh 'sudo -u postgres createdb car'
+    }
 }
