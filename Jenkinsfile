@@ -3,8 +3,6 @@ pipeline {
     stages {
         stage('build') {
             steps {
-                //sh 'sudo apt-get update'
-                //sh 'sudo apt-get install python3.6'
                 sh 'pip3 install --upgrade pip'
                 sh 'pip3 install -r ./backend/requirements.txt'
                 sh 'sudo systemctl start postgresql'
@@ -13,7 +11,6 @@ pipeline {
                 sh 'cd ${WORKSPACE}'
                 sh 'cd ./frontend'
                 sh 'npm install'
-                //sh 'psql -d car -U postgres -a -f car.psql'
             }
         }
         stage('test') {
@@ -25,6 +22,8 @@ pipeline {
         stage('run') {
             steps {
                 sh 'nohup python3 ${WORKSPACE}/backend/app.py &'
+                sh 'cd ${WORKSPACE}'
+                sh 'cd ./frontend'
                 sh 'nohup npm start'
             }
         }
