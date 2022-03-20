@@ -21,10 +21,11 @@ class BookTestCase(unittest.TestCase):
         setup_db(self.app, self.database_path)
 
         # to test successful result
-        self.new_purchase = {"battery": "40 kwh", "wheel": "model1", "tire": "eco"}
+        self.new_purchase = {"user_name": "Winfrey", "battery": 2, "wheel": 2, "tire": 2}
 
         # to test unsuccessful
-        self.invalid_purchase = {"battery": "40 kwh", "wheel": "model3", "tire": "racing"}
+        self.invalid_purchase_1 = {"user_name": "Winfrey", "battery": 1, "wheel": 3, "tire": 3}
+        self.invalid_purchase_2 = {"user_name": "Winfrey", "battery": 3, "wheel": 2, "tire": 3}
 
         # binds the app to the current context
         with self.app.app_context():
@@ -55,8 +56,16 @@ class BookTestCase(unittest.TestCase):
         self.assertEqual(res.status_code, 200)
         self.assertEqual(data["success"], True)
 
-    def test_422_sent_invalid_purchase_info(self):
-        res = self.client().post("/configure", json=self.invalid_purchase)
+    def test_422_sent_invalid_purchase_info_2(self):
+        res = self.client().post("/configure", json=self.invalid_purchase_1)
+        data = json.loads(res.data)
+
+        self.assertEqual(res.status_code, 422)
+        self.assertEqual(data["success"], False)
+        self.assertEqual(data["message"], "unprocessable")
+    
+    def test_422_sent_invalid_purchase_info_2(self):
+        res = self.client().post("/configure", json=self.invalid_purchase_2)
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 422)

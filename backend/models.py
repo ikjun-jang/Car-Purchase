@@ -24,12 +24,14 @@ class Purchase(db.Model):
     __tablename__ = "purchases"
 
     id = Column(Integer, primary_key=True)
+    user_name = Column(String)
     battery = Column(String)
     wheel = Column(String)
     tire = Column(String)
     price = Column(String)
 
-    def __init__(self, battery, wheel, tire, price):
+    def __init__(self, user_name, battery, wheel, tire, price):
+        self.user_name = user_name
         self.battery = battery
         self.wheel = wheel
         self.tire = tire
@@ -49,6 +51,7 @@ class Purchase(db.Model):
     def format(self):
         return {
             "id": self.id,
+            "user_name": self.user_name,
             "battery": self.battery,
             "wheel": self.wheel,
             "tire": self.tire,
