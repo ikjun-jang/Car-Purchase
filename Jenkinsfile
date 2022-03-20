@@ -27,6 +27,8 @@ pipeline {
         }
     }
     post {
-        sh 'sudo -u postgres createdb car'
+        unsuccess {
+            sh 'sudo -u postgres createdb car'
+        }
     }
 }
