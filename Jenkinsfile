@@ -17,7 +17,6 @@ pipeline {
             steps {
                 sh 'sudo -u postgres createdb car_test'
                 sh 'python3 ./backend/test_app.py'
-                sh 'sudo -u postgres dropdb car_test'
             }
         }
         stage('run') {
@@ -27,8 +26,9 @@ pipeline {
         }
     }
     post {
-        unsuccess {
-            sh 'sudo -u postgres createdb car'
+        cleanup {
+            sh 'sudo -u postgres dropdb car'
+            sh 'sudo -u postgres dropdb car_test'
         }
     }
 }
