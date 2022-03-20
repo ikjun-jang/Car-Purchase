@@ -13,9 +13,16 @@ pipeline {
                 //sh 'psql -d car -U postgres -a -f car.psql'
             }
         }
+        stage('test') {
+            steps {
+                sh 'createdb car_test'
+                sh 'python3 ./backend/test_app.py'
+                sh 'dropdb car_test'
+            }
+        }
         stage('run') {
             steps {
-                sh 'nohup python3 app.py &'
+                sh 'nohup python3 ./backend/app.py &'
             }
         }
     }
