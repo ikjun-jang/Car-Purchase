@@ -15,9 +15,9 @@ pipeline {
         }
         stage('test') {
             steps {
-                sh 'createdb car_test'
+                sh 'sudo -u postgres createdb car_test'
                 sh 'python3 ./backend/test_app.py'
-                sh 'dropdb car_test'
+                sh 'sudo -u postgres dropdb car_test'
             }
         }
         stage('run') {
