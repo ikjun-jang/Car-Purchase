@@ -10,6 +10,7 @@ pipeline {
                 sh 'sudo systemctl start postgresql'
                 sh 'sudo -u postgres createdb car'
                 sh 'source ./backend/setup.sh'
+                sh 'cd ${WORKSPACE}'
                 sh 'cd ./frontend'
                 sh 'npm install'
                 //sh 'psql -d car -U postgres -a -f car.psql'
